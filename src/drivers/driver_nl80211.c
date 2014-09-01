@@ -5959,6 +5959,18 @@ static int wpa_driver_nl80211_set_key(const char *ifname, struct i802_bss *bss,
 			goto nla_put_failure;
 		NLA_PUT_FLAG(msg, NL80211_KEY_DEFAULT_TYPE_MULTICAST);
 		nla_nest_end(msg, types);
+	} else if (!addr && key_len && set_tx) {
+		/* this is a group tx key */
+		if (alg == WPA_ALG_IGTK || alg == WPA_ALG_CCMP) {
+			wpa_printf(MSG_DEBUG, "   TX GTK");
+			NLA_PUT_U32(msg, NL80211_ATTR_KEY_TYPE,
+				    NL80211_KEYTYPE_GROUP);
+			if (alg == WPA_ALG_IGTK)
+				NLA_PUT_FLAG(msg,
+					     NL80211_ATTR_KEY_DEFAULT_MGMT);
+			else
+				NLA_PUT_FLAG(msg, NL80211_ATTR_KEY_DEFAULT);
+		}
 	}
 	NLA_PUT_U8(msg, NL80211_ATTR_KEY_IDX, key_idx);
 	NLA_PUT_U32(msg, NL80211_ATTR_IFINDEX, ifindex);
