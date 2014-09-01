@@ -15,6 +15,7 @@
 #else /* CONFIG_NO_SCAN_PROCESSING */
 #define DEFAULT_AP_SCAN 1
 #endif /* CONFIG_NO_SCAN_PROCESSING */
+#define DEFAULT_USER_MPM 1
 #define DEFAULT_FAST_REAUTH 1
 #define DEFAULT_P2P_GO_INTENT 7
 #define DEFAULT_P2P_INTRA_BSS 1
@@ -1079,6 +1080,16 @@ struct wpa_config {
 	 * 2 = like 1, but maintain OUI (with local admin bit set)
 	 */
 	int preassoc_mac_addr;
+
+	/**
+	 * user_mpm - MPM residency
+	 *
+	 * 0: MPM lives in driver.
+	 * 1: wpa_supplicant handles peering and station allocation.
+	 *
+	 * If AMPE or SAE is enabled, the MPM is always in userspace.
+	 */
+	int user_mpm;
 };
 
 
