@@ -202,6 +202,7 @@ endif
 ifdef CONFIG_MESH
 NEED_80211_COMMON=y
 CFLAGS += -DCONFIG_MESH
+OBJS += mesh.o
 endif
 
 ifdef CONFIG_SAE
