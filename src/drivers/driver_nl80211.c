@@ -5017,7 +5017,8 @@ static void wpa_driver_nl80211_deinit(struct i802_bss *bss)
 		}
 	}
 
-	if (drv->nlmode != NL80211_IFTYPE_P2P_DEVICE) {
+	if (drv->nlmode != NL80211_IFTYPE_P2P_DEVICE &&
+	    drv->nlmode != NL80211_IFTYPE_MESH_POINT) {
 		if (!drv->hostapd || !drv->start_mode_ap)
 			wpa_driver_nl80211_set_mode(bss,
 						    NL80211_IFTYPE_STATION);
