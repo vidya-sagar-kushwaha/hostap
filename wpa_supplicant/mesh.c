@@ -181,6 +181,8 @@ static int wpa_supplicant_mesh_init(struct wpa_supplicant *wpa_s,
 		conf->hw_mode = HOSTAPD_MODE_IEEE80211G;
 		conf->channel = (ssid->frequency - 2407) / 5;
 	} else if ((ssid->frequency >= 5180 && ssid->frequency <= 5240) ||
+		   (ssid->frequency >= 5260 && ssid->frequency <= 5320) ||
+		   (ssid->frequency >= 5500 && ssid->frequency <= 5700) ||
 		   (ssid->frequency >= 5745 && ssid->frequency <= 5825)) {
 		conf->hw_mode = HOSTAPD_MODE_IEEE80211A;
 		conf->channel = (ssid->frequency - 5000) / 5;
